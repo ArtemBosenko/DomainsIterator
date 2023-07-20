@@ -16,6 +16,9 @@ class URL
     #[ORM\Column(length: 255)]
     private ?string $address = null;
 
+    #[ORM\ManyToOne(inversedBy: 'urls')]
+    private ?Domain $domain = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -29,6 +32,18 @@ class URL
     public function setAddress(string $address): static
     {
         $this->address = $address;
+
+        return $this;
+    }
+
+    public function getDomain(): ?Domain
+    {
+        return $this->domain;
+    }
+
+    public function setDomain(?Domain $domain): static
+    {
+        $this->domain = $domain;
 
         return $this;
     }
