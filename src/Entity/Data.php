@@ -20,6 +20,10 @@ class Data
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date = null;
 
+    #[ORM\ManyToOne(inversedBy: 'data')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?URL $url = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -45,6 +49,18 @@ class Data
     public function setDate(\DateTimeInterface $date): static
     {
         $this->date = $date;
+
+        return $this;
+    }
+
+    public function getUrl(): ?URL
+    {
+        return $this->url;
+    }
+
+    public function setUrl(?URL $url): static
+    {
+        $this->url = $url;
 
         return $this;
     }
