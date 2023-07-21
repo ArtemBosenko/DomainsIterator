@@ -14,8 +14,8 @@ class DataType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('date', DateTimeType::class)
-            ->add('status', TextType::class)
+            ->add('date', DateTimeType::class, ['attr' => ['required'=>true]])
+            ->add('status', TextType::class, ['attr' => ['required'=>true]])
         ;
     }
 

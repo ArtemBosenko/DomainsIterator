@@ -14,7 +14,7 @@ class UrlsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('url', UrlType::class)
+            ->add('address', UrlType::class, ['attr' => ['required'=>true]])
             ->add(
                     'data', CollectionType::class, [
                     'entry_type' => DataType::class,

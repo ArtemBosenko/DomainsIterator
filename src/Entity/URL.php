@@ -30,6 +30,11 @@ class URL
         $this->data = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->address;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

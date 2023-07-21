@@ -18,7 +18,7 @@ class Domain
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\OneToMany(mappedBy: 'domain', targetEntity: URL::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'domain', targetEntity: URL::class, orphanRemoval: true, cascade: ['persist'])]
     private Collection $urls;
 
     public function __construct()
