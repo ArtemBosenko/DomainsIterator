@@ -29,6 +29,11 @@ class Data
         return $this->id;
     }
 
+    public function __toString()
+    {
+        return 'Date: ' . $this->getDate()->format('d-m-Y H:i:s') . ' / Status: ' . $this->getStatus();
+    }
+
     public function getStatus(): ?string
     {
         return $this->status;

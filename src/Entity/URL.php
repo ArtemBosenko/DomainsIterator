@@ -22,7 +22,7 @@ class URL
     #[ORM\JoinColumn(nullable: false)]
     private ?Domain $domain = null;
 
-    #[ORM\OneToMany(mappedBy: 'url', targetEntity: Data::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'url', targetEntity: Data::class, orphanRemoval: true, cascade: ['persist'])]
     private Collection $data;
 
     public function __construct()
