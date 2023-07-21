@@ -7,7 +7,6 @@ use App\Form\Type\UrlsType;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use EasyCorp\Bundle\EasyAdminBundle\Filter\TextFilter;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\EntityFilter;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
@@ -43,19 +42,12 @@ class DomainCrudController extends AbstractCrudController
     
     public function configureFields(string $pageName): iterable
     {
-        yield TextField::new('name', 'Domain name');
+       yield TextField::new('name', 'Domain name');
 
        yield CollectionField::new('urls', 'Domain URLs')
            ->setFormTypeOption('entry_type', UrlsType::class)
            ->setEntryIsComplex(true)
            ->setColumns('12')
        ;
-
-        
-        // return [
-        //     // IdField::new('id'),
-        //     TextField::new('name','Domain name'),
-        //     // TextEditorField::new('description'),
-        // ];
     }
 }

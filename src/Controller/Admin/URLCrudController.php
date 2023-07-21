@@ -5,7 +5,6 @@ namespace App\Controller\Admin;
 use App\Entity\URL;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\EntityFilter;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\UrlField;
@@ -43,15 +42,6 @@ class URLCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         yield UrlField::new('address', 'URL');
-
-
-
-        // return [
-        //     IdField::new('id'),
-        //     TextField::new('title'),
-        //     TextEditorField::new('description'),
-        // ];
-
     }
     
 }
