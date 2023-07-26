@@ -4,13 +4,16 @@ namespace App\Controller\Admin;
 
 use App\Entity\URL;
 use App\Form\Type\DataType;
+use App\Admin\Filter\DomainsDateFilter;
+use App\Admin\Filter\DomainsRepeaterFilter;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Field\UrlField;
-use EasyCorp\Bundle\EasyAdminBundle\Filter\EntityFilter;
+use EasyCorp\Bundle\EasyAdminBundle\Filter\TextFilter;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Form\Filter\Type\DateTimeFilterType;
 
 class URLCrudController extends AbstractCrudController
 {
@@ -33,11 +36,9 @@ class URLCrudController extends AbstractCrudController
     public function configureFilters(Filters $filters): Filters
     {
         return $filters
-            ->add(EntityFilter::new('data', 'URL data'))
-            // ->add(EntityFilter::new('domain', 'URL domain'))
-            // ->add(EntityFilter::new('data', 'Domain URL'))
-            // ->add(TextFilter::new('urls.date', 'Domain URL date'))
-            // ->add(TextFilter::new('urls.status', 'Domain URL status'))
+            ->add(TextFilter::new('address', 'Filter URLs address'))
+            ->add(DomainsDateFilter::new('data.date', 'Filter URLs by date'))
+            ->add(DomainsRepeaterFilter::new('data.status', 'Filter URLs by status'))
             ;
     }
 
