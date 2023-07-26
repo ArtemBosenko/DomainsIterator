@@ -51,7 +51,7 @@ class DomainsDateFilter implements FilterInterface
       
       $table = "entity";
       for ($count=0; $count<count($this->tables)-1; $count++) {
-         $idTable = substr($this->tables[$count], 0, 1) . "_" . $count;
+         $idTable = substr($this->tables[$count], 0, 1) . "_" . $count . 'datetime';
          $queryBuilder->join($table . '.' . $this->tables[$count], $idTable);
          $table = $idTable;
       }

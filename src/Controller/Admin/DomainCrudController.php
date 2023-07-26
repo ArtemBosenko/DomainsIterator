@@ -4,6 +4,8 @@ namespace App\Controller\Admin;
 
 use App\Entity\Domain;
 use App\Form\Type\UrlsType;
+use App\Admin\Filter\DomainsDateFilter;
+use App\Admin\Filter\DomainsRepeaterFilter;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
@@ -33,9 +35,8 @@ class DomainCrudController extends AbstractCrudController
     {
         return $filters
             ->add(EntityFilter::new('urls', 'Domain URL'))
-            // ->add(EntityFilter::new('data', 'Domain URL'))
-            // ->add(TextFilter::new('urls.date', 'Domain URL date'))
-            // ->add(TextFilter::new('urls.status', 'Domain URL status'))
+            ->add(DomainsDateFilter::new('urls.data.date', 'Filter Domains by date'))
+            ->add(DomainsRepeaterFilter::new('urls.data.status', 'Filter Domains by status'))
             ;
     }
 
