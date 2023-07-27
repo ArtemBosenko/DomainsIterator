@@ -24,6 +24,12 @@ class Data
     #[ORM\JoinColumn(nullable: false)]
     private ?URL $url = null;
 
+    #[ORM\Column(options: ["default" => false])]
+    private ?bool $has_error = false;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $error_description = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -31,7 +37,8 @@ class Data
 
     public function __toString()
     {
-        return 'Date: ' . $this->getDate()->format('d-m-Y H:i:s') . ' / Status: ' . $this->getStatus();
+        return 'Date: ' . $this->getDate()->format('d-m-Y H:i:s') . ' / Status: ' . $this->getStatus()
+        . ' / Has error: ' . $this->isHasError() . ' / Error description: ' . $this->getErrorDescription();
     }
 
     public function getStatus(): ?string
@@ -66,6 +73,30 @@ class Data
     public function setUrl(?URL $url): static
     {
         $this->url = $url;
+
+        return $this;
+    }
+
+    public function isHasError(): ?bool
+    {
+        return $this->has_error;
+    }
+
+    public function setHasError(bool $has_error): static
+    {
+        $this->has_error = $has_error;
+
+        return $this;
+    }
+
+    public function getErrorDescription(): ?string
+    {
+        return $this->error_description;
+    }
+
+    public function setErrorDescription(?string $error_description): static
+    {
+        $this->error_description = $error_description;
 
         return $this;
     }

@@ -4,10 +4,14 @@ namespace App\Controller\Admin;
 
 use App\Entity\Data;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Dto\FieldDto;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\TextFilter;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\DateTimeFilter;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
@@ -44,6 +48,8 @@ class DataCrudController extends AbstractCrudController
         yield AssociationField::new('url', 'Parent URL');
         yield DateTimeField::new('date', 'Date');
         yield TextField::new('status', 'Status');
+        yield BooleanField::new('has_error', 'Has Error');
+        yield TextareaField::new('error_description', 'Error description');
     }
     
 }
