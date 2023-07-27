@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\URLRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\URLRepository;
+use Doctrine\ORM\PersistentCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: URLRepository::class)]
 class URL
@@ -28,6 +29,16 @@ class URL
     public function __construct()
     {
         $this->data = new ArrayCollection();
+    }
+
+    public function getValues()
+    {
+        return [
+            'id' => $this->getId(), 
+            'address' => $this->getAddress(), 
+            'domain_id' => $this->getDomain()->getId(), 
+            'data' => $this->getData()
+        ];
     }
 
     public function __toString()
@@ -64,12 +75,17 @@ class URL
         return $this;
     }
 
-    /**
-     * @return Collection<int, Data>
-     */
-    public function getData(): Collection
+    public function getData(): array
     {
-        return $this->data;
+        $data = $this->data;
+        $return = [];
+        if(!empty($data) && $data instanceof PersistentCollection ){
+            $data = $data->getValues();
+            foreach ($data as $key => $data) {
+                $return[$key] = $data->getValues();
+            }
+        }
+        return $return;
     }
 
     public function addData(Data $data): static

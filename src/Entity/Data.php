@@ -30,6 +30,19 @@ class Data
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $error_description = null;
 
+    public function getValues(): array
+    {
+        $data =  [
+            'id' => $this->getId(),
+            'status' => $this->getStatus(),
+            'date' => $this->getDate()->format('d-m-Y H:i:s'),
+            'url_id' => $this->getUrl()->getId(),
+            'has_error' => $this->isHasError(),
+            'error_description' => $this->getErrorDescription(),
+        ];
+        return $data;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
