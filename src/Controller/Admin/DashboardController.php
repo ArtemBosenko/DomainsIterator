@@ -48,9 +48,10 @@ class DashboardController extends AbstractDashboardController
         // yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
         yield MenuItem::section('Post Types');
-        yield MenuItem::subMenu('Domains', 'fa fa-article')->setSubItems([
-            MenuItem::linkToCrud('Domains', 'fa fa-edit', Domain::class),
-        ]);
+        yield MenuItem::linkToCrud('Domains', 'fa fa-edit', Domain::class);
+        // yield MenuItem::subMenu('Domains', 'fa fa-article')->setSubItems([
+        //     MenuItem::linkToCrud('Domains', 'fa fa-edit', Domain::class),
+        // ]);
         yield MenuItem::section('SubTables');
         yield MenuItem::linkToCrud('URLS', 'fa fa-check-circle-o', URL::class);
         yield MenuItem::linkToCrud('URLs data', 'fa fa-calendar', Data::class);
