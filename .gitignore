@@ -19,6 +19,5 @@
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
 .devcontainer
-/.history**
-/.history/**
 .history/*
+.history/**

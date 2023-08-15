@@ -3,23 +3,18 @@
 namespace App\Controller;
 
 use App\Entity\Domain;
-use Twig\Environment;
-use App\Repository\URLRepository;
-use App\Repository\DataRepository;
 use App\Repository\DomainRepository;
-use Doctrine\ORM\Mapping\Entity;
-use Doctrine\ORM\PersistentCollection;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class DomainController extends AbstractController
 {
 
     public $serializer;
 
-    #[Route('/{limit}/{offset}', name: 'domains')]
+    #[Route('/domains/{limit}/{offset}', name: 'domains')]
     public function index( DomainRepository $domainRepository, $limit = null, $offset = null ): Response
     {
         $domains = $domainRepository->findBy(
@@ -28,16 +23,7 @@ class DomainController extends AbstractController
             $limit,
             $offset
         );
-        if(!empty( $domains ) ) {
-            $this->serializer = $this->container->get('serializer');
-            $domains = $this->getCleanDataArrayFromRaw($domains);
-        } else {
-            $domains = [];
-        }
-        $response = new JsonResponse();
-        $response->setData($domains);
-        $response->headers->set('Content-Type', 'application/json');
-        return $response;
+        return $this->jsonResponse($domains);
         // return $this->render(
         //     'domain/index.html.twig',
         //     [
@@ -46,12 +32,41 @@ class DomainController extends AbstractController
         // );
     }
 
-    // #[Route('/domain', name: 'domain/{id}')]
-    // public function show(): Response 
-    // {
+    #[Route('domain/{id}', name: 'domain')]
+    public function show(DomainRepository $domainRepository, $id = null): Response 
+    {
+        $domain = $domainRepository->findOneBy(
+            ['id'=>$id]
+        );
+        $domain = !empty($domain) && $domain instanceof Domain ? $domain->getValues() : [];
+        return $this->jsonResponse($domain);
+    }
 
-    // }
 
+    /**
+     * Summary of jsonResponse
+     * @param mixed $data
+     * @return JsonResponse
+     */
+    public function jsonResponse($data)
+    {
+        if(!empty( $data ) ) {
+            $this->serializer = $this->container->get('serializer');
+            $data = $this->getCleanDataArrayFromRaw($data);
+        } else {
+            $data = [];
+        }
+        $response = new JsonResponse();
+        $response->setData($data);
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+    }
+
+    /**
+     * Summary of getCleanDataArrayFromRaw
+     * @param mixed $raw_data
+     * @return array
+     */
     public function getCleanDataArrayFromRaw($raw_data): array 
     {
         $clean_data = [];
