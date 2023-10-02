@@ -21,3 +21,4 @@
 .devcontainer
 .history/*
 .history/**
+public/adminer.php!/.idea/

@@ -14,14 +14,14 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 
 class DashboardController extends AbstractDashboardController
 {
-    #[Route('/', name: 'admin')]
+    #[Route('/admin', name: 'admin')]
     public function index(): Response
     {
         // return parent::index();
 
         // Option 1. You can make your dashboard redirect to some common page of your backend
         //
-     
+
         $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
         return $this->redirect($adminUrlGenerator->setController(DomainCrudController::class)->generateUrl());
 
@@ -40,7 +40,7 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('StratisInstances');
+            ->setTitle('DomainsIterator');
     }
 
     public function configureMenuItems(): iterable

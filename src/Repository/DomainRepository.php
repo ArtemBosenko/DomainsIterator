@@ -20,7 +20,6 @@ class DomainRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Domain::class);
     }
-
 //    /**
 //     * @return Domain[] Returns an array of Domain objects
 //     */
