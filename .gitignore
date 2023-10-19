@@ -22,3 +22,4 @@
 .history/*
 .history/**
 public/adminer.php!/.idea/
+.idea/**
