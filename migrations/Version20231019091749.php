@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20230726135108 extends AbstractMigration
+final class Version20231019091749 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,15 +20,15 @@ final class Version20230726135108 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE data ADD has_error BOOLEAN DEFAULT false NOT NULL');
-        $this->addSql('ALTER TABLE data ADD error_description VARCHAR(255) DEFAULT NULL');
+        $this->addSql('ALTER TABLE admin ADD is_verified BOOLEAN NOT NULL');
+        $this->addSql('ALTER TABLE admin ALTER email SET NOT NULL');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE SCHEMA public');
-        $this->addSql('ALTER TABLE data DROP has_error');
-        $this->addSql('ALTER TABLE data DROP error_description');
+        $this->addSql('ALTER TABLE admin DROP is_verified');
+        $this->addSql('ALTER TABLE admin ALTER email DROP NOT NULL');
     }
 }
