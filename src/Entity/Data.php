@@ -35,7 +35,7 @@ class Data
         $data =  [
             'id' => $this->getId(),
             'status' => $this->getStatus(),
-            'date' => $this->getDate()->format('d-m-Y H:i:s'),
+            'date' => $this->getDate(),
             'url_id' => $this->getUrl()->getId(),
             'has_error' => $this->isHasError(),
             'error_description' => $this->getErrorDescription(),

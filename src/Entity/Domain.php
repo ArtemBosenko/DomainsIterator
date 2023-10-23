@@ -32,7 +32,7 @@ class Domain
         return [
             'id' => $this->getId(),
             'name' => $this->getName(),
-            'urls' => $this->getUrls(),
+            'urls' => $this->urls->getValues(),
         ];
     }
 
@@ -61,15 +61,7 @@ class Domain
 
     public function getUrls()
     {
-        $urls = $this->urls;
-        $return_data = [];
-        if(!empty($urls) && $urls instanceof PersistentCollection ){
-            $urls = $urls->getValues();
-            foreach ($urls as $key => $url) {
-                $return_data[$key] = $url->getValues();
-            }
-        }
-        return $return_data;
+        return $this->urls->getValues();
     }
 
     public function addUrl(URL $url): static

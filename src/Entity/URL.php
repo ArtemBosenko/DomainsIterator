@@ -34,9 +34,9 @@ class URL
     public function getValues()
     {
         return [
-            'id' => $this->getId(), 
-            'address' => $this->getAddress(), 
-            'domain_id' => $this->getDomain()->getId(), 
+            'id' => $this->getId(),
+            'address' => $this->getAddress(),
+            'domain_id' => $this->getDomain()->getId(),
             'data' => $this->getData()
         ];
     }
@@ -77,15 +77,7 @@ class URL
 
     public function getData(): array
     {
-        $data = $this->data;
-        $return = [];
-        if(!empty($data) && $data instanceof PersistentCollection ){
-            $data = $data->getValues();
-            foreach ($data as $key => $data) {
-                $return[$key] = $data->getValues();
-            }
-        }
-        return $return;
+        return $this->data->getValues();
     }
 
     public function addData(Data $data): static
