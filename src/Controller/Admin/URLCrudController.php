@@ -2,18 +2,17 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\URL;
-use App\Form\Type\DataType;
 use App\Admin\Filter\DomainsDateFilter;
 use App\Admin\Filter\DomainsRepeaterFilter;
+use App\Entity\URL;
+use App\Form\Type\DataType;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
+use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\UrlField;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\TextFilter;
-use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Form\Filter\Type\DateTimeFilterType;
 
 class URLCrudController extends AbstractCrudController
 {
@@ -30,7 +29,7 @@ class URLCrudController extends AbstractCrudController
             ->setSearchFields(['name'])
             ->setDefaultSort(['domain' => 'DESC'])
             ->showEntityActionsInlined()
-            ;
+        ;
     }
 
     public function configureFilters(Filters $filters): Filters
@@ -39,10 +38,9 @@ class URLCrudController extends AbstractCrudController
             ->add(TextFilter::new('address', 'Filter URLs address'))
             ->add(DomainsDateFilter::new('data.date', 'Filter URLs by date'))
             ->add(DomainsRepeaterFilter::new('data.status', 'Filter URLs by status'))
-            ;
+        ;
     }
 
-    
     public function configureFields(string $pageName): iterable
     {
         yield AssociationField::new('domain', 'Parent Domain');
@@ -51,7 +49,6 @@ class URLCrudController extends AbstractCrudController
         ->setFormTypeOption('entry_type', DataType::class)
         ->setEntryIsComplex(true)
         ->setColumns('12')
-    ;
+        ;
     }
-    
 }

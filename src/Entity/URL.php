@@ -2,11 +2,10 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use App\Repository\URLRepository;
-use Doctrine\ORM\PersistentCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: URLRepository::class)]
 class URL
@@ -37,7 +36,7 @@ class URL
             'id' => $this->getId(),
             'address' => $this->getAddress(),
             'domain_id' => $this->getDomain()->getId(),
-            'data' => $this->getData()
+            'data' => $this->getData(),
         ];
     }
 

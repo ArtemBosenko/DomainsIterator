@@ -24,7 +24,7 @@ class Data
     #[ORM\JoinColumn(nullable: false)]
     private ?URL $url = null;
 
-    #[ORM\Column(options: ["default" => false])]
+    #[ORM\Column(options: ['default' => false])]
     private ?bool $has_error = false;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -32,7 +32,7 @@ class Data
 
     public function getValues(): array
     {
-        $data =  [
+        $data = [
             'id' => $this->getId(),
             'status' => $this->getStatus(),
             'date' => $this->getDate(),
@@ -40,6 +40,7 @@ class Data
             'has_error' => $this->isHasError(),
             'error_description' => $this->getErrorDescription(),
         ];
+
         return $data;
     }
 
@@ -50,8 +51,8 @@ class Data
 
     public function __toString()
     {
-        return 'Date: ' . $this->getDate()->format('d-m-Y H:i:s') . ' / Status: ' . $this->getStatus()
-        . ' / Has error: ' . $this->isHasError() . ' / Error description: ' . $this->getErrorDescription();
+        return 'Date: '.$this->getDate()->format('d-m-Y H:i:s').' / Status: '.$this->getStatus()
+        .' / Has error: '.$this->isHasError().' / Error description: '.$this->getErrorDescription();
     }
 
     public function getStatus(): ?string

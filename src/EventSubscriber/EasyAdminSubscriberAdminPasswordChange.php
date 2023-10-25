@@ -4,9 +4,9 @@ namespace App\EventSubscriber;
 
 use App\Entity\Admin;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityUpdatedEvent;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityPersistedEvent;
+use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityUpdatedEvent;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class EasyAdminSubscriberAdminPasswordChange implements EventSubscriberInterface
@@ -37,7 +37,6 @@ class EasyAdminSubscriberAdminPasswordChange implements EventSubscriberInterface
         }
         $this->setPassword($entity);
     }
-
 
     public function addAdmin(BeforeEntityPersistedEvent $event): void
     {

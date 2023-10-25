@@ -11,11 +11,10 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DomainController extends AbstractController
 {
-
     public $serializer;
 
     #[Route('/domains/{limit}/{offset}', name: 'domains')]
-    public function index( DomainRepository $domainRepository, $limit = null, $offset = null ): Response
+    public function index(DomainRepository $domainRepository, $limit = null, $offset = null): Response
     {
         $domains = $domainRepository->findBy(
             [],
@@ -23,6 +22,7 @@ class DomainController extends AbstractController
             $limit,
             $offset
         );
+
         return $this->jsonResponse($domains);
         // return $this->render(
         //     'domain/index.html.twig',
@@ -33,24 +33,24 @@ class DomainController extends AbstractController
     }
 
     #[Route('domain/{id}', name: 'domain')]
-    public function show(DomainRepository $domainRepository, $id = null): Response 
+    public function show(DomainRepository $domainRepository, $id = null): Response
     {
         $domain = $domainRepository->findOneBy(
-            ['id'=>$id]
+            ['id' => $id]
         );
         $domain = !empty($domain) && $domain instanceof Domain ? $domain->getValues() : [];
+
         return $this->jsonResponse($domain);
     }
 
-
     /**
-     * Summary of jsonResponse
-     * @param mixed $data
+     * Summary of jsonResponse.
+     *
      * @return JsonResponse
      */
     public function jsonResponse($data)
     {
-        if(!empty( $data ) ) {
+        if (!empty($data)) {
             $this->serializer = $this->container->get('serializer');
             $data = $this->getCleanDataArrayFromRaw($data);
         } else {
@@ -59,24 +59,23 @@ class DomainController extends AbstractController
         $response = new JsonResponse();
         $response->setData($data);
         $response->headers->set('Content-Type', 'application/json');
+
         return $response;
     }
 
     /**
-     * Summary of getCleanDataArrayFromRaw
-     * @param mixed $raw_data
-     * @return array
+     * Summary of getCleanDataArrayFromRaw.
      */
-    public function getCleanDataArrayFromRaw($raw_data): array 
+    public function getCleanDataArrayFromRaw($raw_data): array
     {
         $clean_data = [];
-        foreach($raw_data as $key => $value) {
-            if(is_object($value) && method_exists($value,'getValues')){
+        foreach ($raw_data as $key => $value) {
+            if (is_object($value) && method_exists($value, 'getValues')) {
                 $value = $this->getCleanDataArrayFromRaw($value->getValues());
             }
             $clean_data[$key] = $value;
         }
+
         return $clean_data;
     }
-
 }
