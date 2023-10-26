@@ -81,7 +81,7 @@ class DashboardController extends AbstractDashboardController
 
         return $userMenu->addMenuItems(
             [
-                MenuItem::linkToUrl(t('Edit user', domain: 'DomainsApp'), 'fa-user', $targetUrl),
+                MenuItem::linkToUrl(t('Edit '.$user->getUserIdentifier(), domain: 'DomainsApp'), 'fa-user', $targetUrl),
             ]
         );
     }

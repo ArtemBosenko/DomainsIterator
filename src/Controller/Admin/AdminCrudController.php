@@ -21,7 +21,7 @@ class AdminCrudController extends AbstractCrudController
         return [
             TextField::new('username'),
             EmailField::new('email'),
-            Field::new('password', 'Change password?')
+            Field::new('password', 'Set new password')
                 ->onlyOnForms()
                 ->setFormType(PasswordType::class),
         ];
