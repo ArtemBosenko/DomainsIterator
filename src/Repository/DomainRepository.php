@@ -20,6 +20,26 @@ class DomainRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Domain::class);
     }
+
+    public function updateDomainsData()
+    {
+        $result = [
+            'success' => [],
+            'failed' => [],
+        ];
+        $domains = $this->createQueryBuilder('d')
+            ->orderBy('d.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+        if (!empty($domains)) {
+            foreach ($domains as $domain) {
+
+            }
+        }
+
+        return $result;
+    }
     //    /**
     //     * @return Domain[] Returns an array of Domain objects
     //     */

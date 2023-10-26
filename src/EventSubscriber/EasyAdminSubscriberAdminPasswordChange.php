@@ -2,7 +2,7 @@
 
 namespace App\EventSubscriber;
 
-use App\Entity\Admin;
+use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityPersistedEvent;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityUpdatedEvent;
@@ -32,7 +32,7 @@ class EasyAdminSubscriberAdminPasswordChange implements EventSubscriberInterface
     {
         $entity = $event->getEntityInstance();
 
-        if (!($entity instanceof Admin)) {
+        if (!($entity instanceof User)) {
             return;
         }
         $this->setPassword($entity);
@@ -42,13 +42,13 @@ class EasyAdminSubscriberAdminPasswordChange implements EventSubscriberInterface
     {
         $entity = $event->getEntityInstance();
 
-        if (!($entity instanceof Admin)) {
+        if (!($entity instanceof User)) {
             return;
         }
         $this->setPassword($entity);
     }
 
-    public function setPassword(Admin $entity): void
+    public function setPassword(User $entity): void
     {
         $pass = $entity->getPassword();
 

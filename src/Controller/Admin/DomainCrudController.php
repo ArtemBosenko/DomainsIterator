@@ -10,7 +10,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\UrlField;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\EntityFilter;
 
 class DomainCrudController extends AbstractCrudController
@@ -42,9 +42,9 @@ class DomainCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
-        yield TextField::new('name', 'Domain name');
+        yield UrlField::new('name', 'Domain url');
 
-        yield CollectionField::new('urls', 'Domain URLs')
+        yield CollectionField::new('urls', 'Domain pages URLs')
             ->setFormTypeOption('entry_type', UrlsType::class)
             ->setEntryIsComplex(true)
             ->setColumns('12')

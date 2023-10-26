@@ -26,7 +26,7 @@ class DashboardController extends AbstractDashboardController
         $this->adminUrlGenerator = $adminUrlGenerator;
     }
 
-    #[Route('/admin', name: 'admin')]
+    #[Route('/user', name: 'user')]
     public function index(): Response
     {
         // return parent::index();
