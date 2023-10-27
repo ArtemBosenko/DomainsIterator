@@ -30,6 +30,9 @@ class Data
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $error_description = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $screenshot = null;
+
     public function getValues(): array
     {
         return [
@@ -49,8 +52,16 @@ class Data
 
     public function __toString()
     {
-        return 'Date of parsing: '.$this->getDate()->format('d-m-Y H:i:s').' / Status: '.$this->getStatus()
-        .' / Has error: '.$this->isHasError().' / Error description: '.$this->getErrorDescription();
+        $string = 'Date of parsing: '.$this->getDate()->format('d-m-Y H:i:s');
+        $string .= ' / Status: '.$this->getStatus();
+        if ($this->isHasError()) {
+            $string .= ' / Has error';
+            if ($this->getErrorDescription()) {
+                $string .= ' / Error description: '.$this->getErrorDescription();
+            }
+        }
+
+        return $string;
     }
 
     public function getStatus(): ?string
@@ -109,6 +120,18 @@ class Data
     public function setErrorDescription(?string $error_description): static
     {
         $this->error_description = $error_description;
+
+        return $this;
+    }
+
+    public function getScreenshot(): ?string
+    {
+        return $this->screenshot;
+    }
+
+    public function setScreenshot(?string $screenshot): static
+    {
+        $this->screenshot = $screenshot;
 
         return $this;
     }
