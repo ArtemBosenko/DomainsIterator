@@ -32,7 +32,7 @@ class Data
 
     public function getValues(): array
     {
-        $data = [
+        return [
             'id' => $this->getId(),
             'status' => $this->getStatus(),
             'date' => $this->getDate(),
@@ -40,8 +40,6 @@ class Data
             'has_error' => $this->isHasError(),
             'error_description' => $this->getErrorDescription(),
         ];
-
-        return $data;
     }
 
     public function getId(): ?int
@@ -51,7 +49,7 @@ class Data
 
     public function __toString()
     {
-        return 'Date: '.$this->getDate()->format('d-m-Y H:i:s').' / Status: '.$this->getStatus()
+        return 'Date of parsing: '.$this->getDate()->format('d-m-Y H:i:s').' / Status: '.$this->getStatus()
         .' / Has error: '.$this->isHasError().' / Error description: '.$this->getErrorDescription();
     }
 

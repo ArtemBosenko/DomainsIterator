@@ -34,7 +34,6 @@ class DomainRepository extends ServiceEntityRepository
         ;
         if (!empty($domains)) {
             foreach ($domains as $domain) {
-
             }
         }
 
