@@ -30,9 +30,6 @@ class Data
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $error_description = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $screenshot = null;
-
     public function getValues(): array
     {
         return [
@@ -120,18 +117,6 @@ class Data
     public function setErrorDescription(?string $error_description): static
     {
         $this->error_description = $error_description;
-
-        return $this;
-    }
-
-    public function getScreenshot(): ?string
-    {
-        return $this->screenshot;
-    }
-
-    public function setScreenshot(?string $screenshot): static
-    {
-        $this->screenshot = $screenshot;
 
         return $this;
     }
