@@ -5,7 +5,6 @@ namespace App\Controller\Admin;
 use App\Admin\Filter\DomainsDateFilter;
 use App\Admin\Filter\DomainsRepeaterFilter;
 use App\Entity\Domain;
-use App\Form\Type\UrlsType;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
@@ -42,12 +41,13 @@ class DomainCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
-        yield UrlField::new('name', 'Domain url');
+        yield UrlField::new('name', 'Domain url')->setRequired(true);
 
         yield CollectionField::new('urls', 'Domain pages URLs')
-            ->setFormTypeOption('entry_type', UrlsType::class)
             ->setEntryIsComplex(true)
             ->setColumns('12')
+            ->useEntryCrudForm()
+            ->setRequired(true)
         ;
     }
 }

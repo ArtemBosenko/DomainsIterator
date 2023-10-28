@@ -49,8 +49,16 @@ class Data
 
     public function __toString()
     {
-        return 'Date of parsing: '.$this->getDate()->format('d-m-Y H:i:s').' / Status: '.$this->getStatus()
-        .' / Has error: '.$this->isHasError().' / Error description: '.$this->getErrorDescription();
+        $string = 'Date of parsing: '.$this->getDate()->format('d-m-Y H:i:s');
+        $string .= ' / Status: '.$this->getStatus();
+        if ($this->isHasError()) {
+            $string .= ' / Has error';
+            if ($this->getErrorDescription()) {
+                $string .= ' / Error description: '.$this->getErrorDescription();
+            }
+        }
+
+        return $string;
     }
 
     public function getStatus(): ?string
