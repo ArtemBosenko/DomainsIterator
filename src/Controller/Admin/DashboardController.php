@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Data;
 use App\Entity\Domain;
 use App\Entity\URL;
+use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -26,7 +27,7 @@ class DashboardController extends AbstractDashboardController
         $this->adminUrlGenerator = $adminUrlGenerator;
     }
 
-    #[Route('/user', name: 'user')]
+    #[Route('/admin', name: 'admin')]
     public function index(): Response
     {
         // return parent::index();
@@ -62,6 +63,11 @@ class DashboardController extends AbstractDashboardController
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
         yield MenuItem::section('Post Types');
         yield MenuItem::linkToCrud('Domains', 'fa fa-edit', Domain::class);
+        yield MenuItem::section('Media');
+//        yield MenuItem::linkToCrud('SonataMediaGallery', 'fa fa-image', SonataMediaGallery::class);
+        yield MenuItem::section('Users')->setPermission('ROLE_ADMIN');
+        yield MenuItem::linkToCrud('Users', 'fa fa-users', User::class)->setPermission('ROLE_ADMIN');
+
         // yield MenuItem::subMenu('Domains', 'fa fa-article')->setSubItems([
         //     MenuItem::linkToCrud('Domains', 'fa fa-edit', Domain::class),
         // ]);
@@ -74,7 +80,7 @@ class DashboardController extends AbstractDashboardController
     {
         $userMenu = parent::configureUserMenu($user);
         $targetUrl = $this->adminUrlGenerator
-            ->setController(AdminCrudController::class)
+            ->setController(UserCrudController::class)
             ->setAction(Crud::PAGE_EDIT)
             ->setEntityId($user->getId())
             ->generateUrl();

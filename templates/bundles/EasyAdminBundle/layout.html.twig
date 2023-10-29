@@ -90,7 +90,7 @@
           <div>
             <span class="user-label">{{ 'user.logged_in_as'|trans(domain = 'EasyAdminBundle') }}</span>
             <span class="user-name">
-               <a href="{{ ea_url().setController('App\\Controller\\Admin\\AdminCrudController').setAction('edit').setEntityId(app.user.id) }}">
+               <a href="{{ ea_url().setController('App\\Controller\\Admin\\UserCrudController').setAction('edit').setEntityId(app.user.id) }}">
                  {{ ea.user is null ? 'user.anonymous'|trans(domain = 'EasyAdminBundle') : ea.userMenu.name }}
                </a>
             </span>

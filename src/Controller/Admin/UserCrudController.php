@@ -9,7 +9,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
-class AdminCrudController extends AbstractCrudController
+class UserCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
