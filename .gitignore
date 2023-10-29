@@ -28,3 +28,8 @@ public/adminer.php!/.idea/
 /.php-cs-fixer.cache
 ###< friendsofphp/php-cs-fixer ###
 /public/uploads/
+
+###> liip/imagine-bundle ###
+/public/media/cache/
+###< liip/imagine-bundle ###
+/public/adminer.php
