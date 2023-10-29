@@ -64,7 +64,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::section('Post Types');
         yield MenuItem::linkToCrud('Domains', 'fa fa-edit', Domain::class);
         yield MenuItem::section('Media');
-//        yield MenuItem::linkToCrud('SonataMediaGallery', 'fa fa-image', SonataMediaGallery::class);
+        //        yield MenuItem::linkToCrud('SonataMediaGallery', 'fa fa-image', SonataMediaGallery::class);
         yield MenuItem::section('Users')->setPermission('ROLE_ADMIN');
         yield MenuItem::linkToCrud('Users', 'fa fa-users', User::class)->setPermission('ROLE_ADMIN');
 
