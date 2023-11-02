@@ -27,6 +27,13 @@ class DashboardController extends AbstractDashboardController
         $this->adminUrlGenerator = $adminUrlGenerator;
     }
 
+    final public function configureCrud(): Crud
+    {
+        return parent::configureCrud()
+            ->addFormTheme('@EasyMedia/form/easy-media.html.twig')
+        ;
+    }
+
     #[Route('/admin', name: 'admin')]
     public function index(): Response
     {
@@ -64,7 +71,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::section('Post Types');
         yield MenuItem::linkToCrud('Domains', 'fa fa-edit', Domain::class);
         yield MenuItem::section('Media');
-        //        yield MenuItem::linkToCrud('SonataMediaGallery', 'fa fa-image', SonataMediaGallery::class);
+        yield MenuItem::linkToRoute('Medias', 'fa fa-picture-o', 'media.index');
         yield MenuItem::section('Users')->setPermission('ROLE_ADMIN');
         yield MenuItem::linkToCrud('Users', 'fa fa-users', User::class)->setPermission('ROLE_ADMIN');
 

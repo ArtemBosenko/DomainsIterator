@@ -1,0 +1,76 @@
+twig:
+  form_themes:
+    - '@EasyMedia/form/easy-media.html.twig'
+
+doctrine:
+  dbal:
+    types:
+      easy_media_type: Adeliom\EasyMediaBundle\Types\EasyMediaType
+
+flysystem:
+  storages:
+    medias.storage:
+      adapter: 'local'
+      options:
+        directory: '%kernel.project_dir%/public/uploads/easy_media'
+
+easy_media:
+  storage_name: medias.storage
+  media_entity: App\Entity\EasyMedia\Media
+  folder_entity: App\Entity\EasyMedia\Folder
+  base_url: /uploads/easy_media
+
+  # ignore any file starts with "."
+  ignore_files:         '/^\..*/'
+
+  # remove any file special chars except
+  # dot .
+  # dash -
+  # underscore _
+  # single quote ''
+  # white space
+  # parentheses ()
+  # comma ,
+  allowed_fileNames_chars: '\._\-\''\s\(\),'
+
+  # remove any folder special chars except
+  # dash -
+  # underscore _
+  # white space
+  #
+  # to add & nest folders in one go add '\/'
+  # avoid using '#' as browser interpret it as an anchor
+  allowed_folderNames_chars: _\-\s
+
+  # disallow uploading files with the following mimetypes (https://www.iana.org/assignments/media-types/media-types.xhtml)
+  unallowed_mimes:
+    # Defaults:
+    - php
+    - java
+
+  # disallow uploading files with the following extensions (https://en.wikipedia.org/wiki/List_of_filename_extensions)
+  unallowed_ext:
+    # Defaults:
+    - php
+    - jav
+    - py
+
+  extended_mimes:
+    # any extra mime-types that doesnt have "image" in it
+    image:                # Required
+      # Default:
+      - binary/octet-stream
+    # any extra mime-types that doesnt have "compressed" in it
+    archive:              # Required
+      # Defaults:
+      - application/x-tar
+      - application/zip
+
+  # display file last modification time as
+  last_modified_format: Y-m-d
+
+  # hide file extension in files list
+  hide_files_ext:       true
+
+  # loaded chunk amount "pagination"
+  pagination_amount:    50

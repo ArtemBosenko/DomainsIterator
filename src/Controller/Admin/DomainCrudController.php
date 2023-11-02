@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Admin\Filter\DomainsDateFilter;
 use App\Admin\Filter\DomainsRepeaterFilter;
 use App\Entity\Domain;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
@@ -17,6 +18,13 @@ class DomainCrudController extends AbstractCrudController
     public static function getEntityFqcn(): string
     {
         return Domain::class;
+    }
+
+    final public function configureAssets(Assets $assets): Assets
+    {
+        return $assets
+            ->addWebpackEncoreEntry('app')
+        ;
     }
 
     public function configureCrud(Crud $crud): Crud
