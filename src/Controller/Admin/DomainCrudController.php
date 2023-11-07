@@ -24,6 +24,8 @@ class DomainCrudController extends AbstractCrudController
     {
         return $assets
             ->addWebpackEncoreEntry('app')
+            ->addCssFile('bundles/easymedia/style/style.css')
+            ->addJsFile('bundles/easymedia/js/app.js')
         ;
     }
 
